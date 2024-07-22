@@ -1,6 +1,6 @@
 # Description: A program to enter and calculate insurance policy information for new customers of One Stop Insurance Company.
 # Author: Noah Lambe
-# Dates: July 15, 2024
+# Dates: July 15, 2024 - July 18, 2024
 
 # Define required libraries.
 from datetime import datetime, timedelta
@@ -180,16 +180,16 @@ while True:
     while True:
         # Input claim details
         print()
-        claimNumber = input("Enter claim number: ")
+        claimNumber = input("Enter claim number (#####): ")
         print()
         claimDate = input("Enter claim date (YYYY-MM-DD): ")
         print()
-        claimAmount = float(input("Enter claim amount: "))
+        claimAmount = float(input("Enter claim amount (0 - 99,999.99): "))
 
         claim = {
             'claimNumber': claimNumber,
             'claimDate': claimDate,
-            'claimAmount': claimAmount
+            'claimAmount': fv.FDollar2(claimAmount)
         }
 
         claims.append(claim)
@@ -251,6 +251,7 @@ while True:
 
     # Format Outputs.
     invoiceDateDSP = fv.FDateS(invoiceDate)
+    firstPaymentDateDSP = fv.FDateS(firstPaymentDate)
     fullNameDSP = f"{firstName} {lastName}"
     phoneNumberDSP = FPhonenumber(phoneNumber)
 
@@ -292,6 +293,7 @@ while True:
     print(f"----------------------------------------------------------------------")
     print(f"                      One Stop Insurance Company                      ")
     print(f"                           Date: {invoiceDateDSP:>10s}                ")
+    print(f"                         Policy Number: {POLICY_NUMBER}")
     print(f"----------------------------------------------------------------------")
     print()
     print(f"Customer: {fullNameDSP:<20s}  Address: {address:<29s}")
@@ -300,7 +302,7 @@ while True:
     print()
     print(f"Number of Vehicles: {numberOfVehicles:<3d}                  Extra Liability Coverage: {extraLiabilityDSP:<3s}")
     print(f"Payment option: {paymentOptionsDSP:<15s}          Glass Repair Coverage:    {glassCoverageDSP:<3s}")
-    print(f"                                         Car Lending Coverage:     {carLendDSP:<3s}")
+    print(f"Date of first payment: {firstPaymentDateDSP:<10s}        Car Lending Coverage:     {carLendDSP:<3s}")
     print()
     print(f"----------------------------------------------------------------------")
     print()
@@ -324,7 +326,7 @@ while True:
     print()
 
     for claim in claims:
-        print(f"              {claim['claimNumber']:>5s}           {claim['claimDate']:<10s}     {claim['claimAmount']:>10.2f}")
+        print(f"                {claim['claimNumber']:>5s}         {claim['claimDate']:<10s}     {claim['claimAmount']:>10s}")
 
     print()
     print(f"----------------------------------------------------------------------")
@@ -352,23 +354,23 @@ while True:
     
     # Generate and display progress bar.
     print()
-    TotalIterations = 30 # The more iterations, the more time is takes.
-    Message = "Saving claim Data ..."
+    TotalIterations = 30
+    Message = "Saving Policy Data ..."
  
     for i in range(TotalIterations + 1):
-        time.sleep(0.1)  # Simulate some work
+        time.sleep(0.1)
         progress_bar(i, TotalIterations, prefix=Message, suffix='Complete', length=50)
  
     print()
  
     print()
-    print(f"Policy information for {firstName} {lastName} has been successfully saved to Claims.dat ...")
+    print(f"Policy information for {firstName} {lastName} has been successfully saved to Customers.dat ...")
     print()
 
     POLICY_NUMBER += 1
 
     print()
-    Continue = input("Do you want to create another claim? (Y/N): ").upper()
+    Continue = input("Do you want to create another policy? (Y/N): ").upper()
     if Continue == "N":
         break
 
