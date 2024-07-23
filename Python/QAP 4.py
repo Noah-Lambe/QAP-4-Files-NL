@@ -200,11 +200,12 @@ while True:
             break
             
     # Perform required calculations.
-    if numberOfVehicles == 1:
-        premiumCost = numberOfVehicles * BASIC_PREMIUM_RATE
-    elif numberOfVehicles > 1:
+    
+    if numberOfVehicles > 1:
         discount = ((numberOfVehicles - 1) * BASIC_PREMIUM_RATE) * ADDITIONAL_CAR_DISCOUNT
         premiumCost = numberOfVehicles * BASIC_PREMIUM_RATE - discount
+    else:
+        premiumCost = numberOfVehicles * BASIC_PREMIUM_RATE
 
     if extraLiability == "Y":
         extraLiabilityCost = numberOfVehicles * LIABILITY_COVERAGE_RATE
@@ -245,6 +246,8 @@ while True:
         monthlyPayment = (PROCESSING_FEE + totalCost) / 8
     elif paymentOptions == "D":
         monthlyPayment = (PROCESSING_FEE + (totalCost - downPayment)) / 8
+    else:
+        monthlyPayment = 0
 
     invoiceDate = datetime.date.today()
     firstPaymentDate = first_day_of_next_month()
