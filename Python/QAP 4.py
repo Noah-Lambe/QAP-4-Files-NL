@@ -246,8 +246,6 @@ while True:
         monthlyPayment = (PROCESSING_FEE + totalCost) / 8
     elif paymentOptions == "D":
         monthlyPayment = (PROCESSING_FEE + (totalCost - downPayment)) / 8
-    else:
-        monthlyPayment = 0
 
     invoiceDate = datetime.date.today()
     firstPaymentDate = first_day_of_next_month()
