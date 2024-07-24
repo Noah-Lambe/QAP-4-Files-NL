@@ -52,100 +52,128 @@ while True:
     while True:
         print()
         firstName = input("Enter customer's first name: ").capitalize()
+
         if firstName == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif not firstName.isalpha():
-            print("Invalid input. Please enter a valid first name.")
+            print()
+            print("     Invalid input. Please enter a valid first name.")
         else:
             break
 
     while True:
         print()
         lastName = input("Enter customer's last name: ").capitalize()
+
         if lastName == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif not lastName.isalpha():
-            print("Invalid input. Please enter a valid last name.")
+            print()
+            print("     Invalid input. Please enter a valid last name.")
         else:
             break
     
     while True:
         print()
         address = input("Enter customer's address: ").title()
+
         if address == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         else:
             break
     
     while True:
         print()
         city = input("Enter customer's city: ").title()
+
         if city == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         else:
             break
     
     while True:
         print()
         province = input("Enter customer's province (XX): ").upper()
+
         if province == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif province not in VALID_PROVINCES:
-            print("Invalid input. Please enter a valid province abbreviation.")
+            print()
+            print("     Invalid input. Please enter a valid province abbreviation.")
         else:
             break
 
     while True:
         print()
-        postalCode = input("Enter customer's postal code: ").upper()
+        postalCode = input("Enter customer's postal code (X#X #X#): ").upper().replace(" ", "")
+
         if postalCode == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif len(postalCode)!= 6:
-            print("Invalid input. Please enter a valid postal code.")
+            print()
+            print("     Invalid input. Please enter a valid postal code.")
         else:
             break
 
     while True:
         print()
         phoneNumber = input("Enter customer's phone number (###-###-####): ").replace("-", "")
+
         if phoneNumber == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif len(phoneNumber)!= 10:
-            print("Invalid input. Please enter a valid phone number.")
+            print()
+            print("     Invalid input. Please enter a valid phone number.")
         else:
             break
 
     while True:
         print()
         numberOfVehicles = int(input("Enter the number of vehicles being insured: "))
+
         if numberOfVehicles == "":
-            print("Invalid input. Field cannot be blank.")
+            print()
+            print("     Invalid input. Field cannot be blank.")
         elif numberOfVehicles <= 0:
-            print("Invalid input. Number of vehicles must be greater than 0.")
+            print()
+            print("     Invalid input. Number of vehicles must be greater than 0.")
         else:
             break
 
     while True:
         print()
         extraLiability = input("Would you like to insure extra liability coverage? (Y/N): ").upper()
+
         if extraLiability!= "Y" and extraLiability!= "N":
-            print("Invalid input. Please enter either Y or N.")
+            print()
+            print("     Invalid input. Please enter either Y or N.")
         else:
             break
     
     while True:
         print()
         glassCoverage = input("Would you like to insure glass coverage? (Y/N): ").upper()
+
         if glassCoverage!= "Y" and glassCoverage!= "N":
-            print("Invalid input. Please enter either Y or N.")
+            print()
+            print("     Invalid input. Please enter either Y or N.")
         else:
             break
 
     while True:
         print()
         carLend = input("Would you like to insure car lending coverage? (Y/N): ").upper()
+
         if carLend!= "Y" and carLend!= "N":
-            print("Invalid input. Please enter either Y or N.")
+            print()
+            print("     Invalid input. Please enter either Y or N.")
         else:
             break
     
@@ -158,37 +186,93 @@ while True:
         paymentOptions = input("Enter preferred payment option, full, monthly or down payment (F, M, D): ").upper()
 
         if paymentOptions not in ["F", "M", "D"]:
-            print("Invalid input. Please enter a valid payment option.")
+            print()
+            print("     Invalid input. Please enter a valid payment option.")
             continue
         
-        if paymentOptions == "D":
-            try:
-                downPayment = float(input("Enter the down payment amount: "))
-                if downPayment <= 0:
-                    print("Invalid input. Down payment amount must be greater than 0.")
-                    continue
-                else:
-                    break
-            except ValueError:
-                print("Invalid input. Enter a valid down payment amount.")
-        
-        else:
-            break
+        while True:
+            if paymentOptions == "D":
+                
+                try:
+                    print()
+                    downPayment = input("Enter the down payment amount: ")
+
+                    if downPayment == "":
+                        print()
+                        print("     Invalid input. Field cannot be blank.")
+                        continue
+
+                    downPayment = float(downPayment)
+
+                    if downPayment <= 0:
+                        print()
+                        print("     Invalid input. Down payment amount must be greater than 0.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print()
+                    print("     Invalid input. Enter a valid down payment amount.")
+            
+            else:
+                break
+
+        break
 
     claims = []
 
     while True:
         # Input claim details
-        print()
-        claimNumber = input("Enter claim number (#####): ")
-        print()
-        claimDate = input("Enter claim date (YYYY-MM-DD): ")
-        print()
-        claimAmount = float(input("Enter claim amount (0 - 99,999.99): "))
+        while True:
+            print()
+            claimNumber = input("Enter claim number (#####): ")
+
+            if len(claimNumber)!= 5:
+                print()
+                print("     Invalid input. Claim number must be 5 characters. (#####).")
+            elif not claimNumber.isdigit():
+                print()
+                print("     Invalid input. Claim number must be 5 digits. (#####).")
+            else:
+                break
+
+        while True:
+            print()
+            claimDate = input("Enter claim date (YYYY-MM-DD): ")
+
+            try:
+                claimDate = datetime.datetime.strptime(claimDate, "%Y-%m-%d").date()
+                break
+            except ValueError:
+                print()
+                print("     Invalid input. Enter a valid claim date (YYYY-MM-DD).")
+                continue
+
+        while True:
+            print()
+            try:
+                claimAmount = input("Enter claim amount (0 - 99,999.99): ")
+
+                if claimAmount == "":
+                    print()
+                    print("     Invalid input. Field cannot be blank.")
+                    continue
+
+                claimAmount = float(claimAmount)
+
+                if claimAmount < 0 or claimAmount > 99999.99:
+                    print()
+                    print("     Invalid input. Claim amount must be between 0 and 99,999.99.")
+                else:
+                    break
+            except ValueError:
+                print()
+                print("     Invalid input. Claim amount must be a number.")
+
 
         claim = {
             'claimNumber': claimNumber,
-            'claimDate': claimDate,
+            'claimDate': fv.FDateS(claimDate),
             'claimAmount': fv.FDollar2(claimAmount)
         }
 
@@ -229,16 +313,31 @@ while True:
 
     while True:
         if downPayment > totalCost:
-            print("Invalid input. Down payment cannot exceed total cost.")
+            print()
+            print("     Policy Calculation Failed.")
+            print("     Invalid input. Down payment cannot exceed total cost.")
+            
             try:
                 print()
-                downPayment = float(input("Enter the down payment amount: "))
+                downPayment = input("Enter the down payment amount: ")
+
+                if downPayment == "":
+                    print()
+                    print("     Invalid input. Field cannot be blank.")
+                    continue
+
+                downPayment = float(downPayment)
+
                 if downPayment <= 0:
-                    print("Invalid input. Down payment amount must be greater than 0.")
+                    print()
+                    print("     Invalid input. Down payment amount must be greater than 0.")
+                    continue
                 else:
                     break
+
             except ValueError:
-                print("Invalid input. Enter a valid down payment amount.")
+                print()
+                print("     Invalid input. Enter a valid down payment amount.")
         else:
             break
 
