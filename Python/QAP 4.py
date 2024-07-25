@@ -39,7 +39,7 @@ def first_day_of_next_month():
     first_next_month = first_next_month.replace(day=1)
     return first_next_month
 
-def FPhonenumber(phone):
+def format_phone_number(phone):
 
     phoneNumberStr = f"(" + phone [0:3] + ")" + " " + phone [3:6] + "-" + phone [6:10]
 
@@ -353,7 +353,7 @@ while True:
     invoiceDateDSP = fv.FDateS(invoiceDate)
     firstPaymentDateDSP = fv.FDateS(firstPaymentDate)
     fullNameDSP = f"{firstName} {lastName}"
-    phoneNumberDSP = FPhonenumber(phoneNumber)
+    phoneNumberDSP = format_phone_number(phoneNumber)
 
     if paymentOptions == "D":
         paymentOptionsDSP = "Down Payment"
