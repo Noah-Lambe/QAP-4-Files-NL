@@ -7,6 +7,8 @@ const Customer = {
     gender: 'male',
     roomPreferences: ['non-smoking', 'queen bed', 'pool access', 'ground floor', 'wheelchair access', 'kitchenette'],
     paymentMethod: 'Credit Card',
+    email: 'ricky.bobby@example.com',
+    creditCard: '1234 4567 3456 2345',
     mailingAddress: {
         street: '17240 Connor Quay Ct',
         city: 'Cornelius',
@@ -38,7 +40,9 @@ const Customer = {
     getDescription() {
         return `
             Our customer ${this.first} ${this.last} is ${this.getAge()} years old. He identifies as a ${this.gender}. 
-            He wishes to have a ${this.roomPreferences[0]} room with a ${this.roomPreferences[1]}. He would like ${this.roomPreferences[2]} and for his room to be on the ${this.roomPreferences[3]} with ${this.roomPreferences[4]} and a ${this.roomPreferences[5]}. He will pay by ${this.paymentMethod}.
+            He wishes to have a ${this.roomPreferences[0]} room with a ${this.roomPreferences[1]}. He would like ${this.roomPreferences[2]} 
+            and for his room to be on the ${this.roomPreferences[3]} with ${this.roomPreferences[4]} and a ${this.roomPreferences[5]}. He will pay by ${this.paymentMethod}.
+            His card number is ${this.creditCard}. He would like to be contacted via his email address ${this.email}. 
             His mailing Address is ${this.mailingAddress.street}, ${this.mailingAddress.city}, ${this.mailingAddress.state}, ${this.mailingAddress.zipCode}.
             His phone number is ${this.phoneNumber} and will be staying in the motel from ${this.checkInOut.checkInDate.toDateString()}
             to ${this.checkInOut.checkOutDate.toDateString()} for a duration of ${this.getDurationOfStay()} days.
